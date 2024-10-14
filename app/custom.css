@@ -1,0 +1,121 @@
+body {
+    background-color: #111111;
+}
+.navigation-bg {
+  background-color: #111111;
+}
+.navigation-bg a {
+  text-decoration: none;
+}
+
+.hero-section {
+  position: relative;
+  background-color: #111111;
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  padding-top: 16rem;
+  padding-bottom: 16rem;
+  z-index: 1;
+  background-blend-mode: overlay;
+}
+
+
+.hero-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+  
+  .container-padding {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  .shape-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .background-shape {
+    position: absolute;
+    width: 100%;
+    padding-bottom: 100%;
+    background: #222222;
+    border-radius: 50%;
+    left: 0;
+    z-index: -1;
+  }
+  
+  .responsive-image {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+  }
+  
+  .aboutme-bg {
+    background-color: #222222;
+    color: #ffffff;
+  }
+
+  .aboutme-bg .icon-shape svg {
+    width: 48px;
+  }
+
+  .gallery-container {
+    column-count: 3;
+    column-gap: 16px;
+  }
+  
+  .gallery-item {
+    background: #222222;
+    padding: 15px;
+    display: inline-block;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .gallery-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .vital-stat-item {
+    min-width: 120px;
+    margin-right: 20px;
+  }
+  .vital-stat-label,
+  .vital-stat-value {
+    display: block;
+  }
+  
+    
+  @media (max-width: 992px) {
+    .gallery-container {
+      column-count: 2;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .gallery-container {
+      column-count: 1;
+    }
+  }
+
+  .footer-bg {
+    background-color: #111111;
+  }
+
+  footer .social-icons svg {
+    width: 24px;
+  }
+
+  .experience-label svg, .location-label svg {
+    width: 10px;
+    margin-right: 5px;
+  }
