@@ -2,17 +2,18 @@ import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./custom.css";
 import Script from "next/script";
-import { getData } from "@/lib/data";
+import { getProfile } from "@/lib/data";
 
 export async function generateMetadata() {
-  const c = await getData();
+  const c = await getProfile();
+  const profile = c.data.profile;
 
   return {
     title:
-      c.data.title === "" ? "Welcome to " + c.data.domainName : c.data.title,
-    description: c.data.description,
-    keywords: c.data.keywords,
-    author: c.data.author,
+    'ProfileSuite - '+profile.name,
+    description: profile.introduction,
+    keywords: profile.slogan,
+    
   };
 }
 
