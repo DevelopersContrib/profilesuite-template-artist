@@ -21,7 +21,7 @@ export default async function Home() {
   return (
     <>
       <Navigation domain={domain} />
-      <Hero profile={profile} links={links} />
+      <Hero profile={profile} links={links} gallery={gallery}/>
       {gallery.length > 0 && <Gallery gallery={gallery} />}
       <Biography profile={profile} experiences={experience} social={social} links={links} />
       <Footer domain={domain} social={social} />
