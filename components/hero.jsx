@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function Hero({ profile, links }) {
+export default function Hero({ profile, links, gallery }) {
   return (
     <section 
       className="hero-section" 
