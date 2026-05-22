@@ -1,0 +1,182 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model members {
+  id              BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  email           String    @unique(map: "email_address") @db.VarChar(255)
+  password        String    @db.VarChar(1023)
+  approved        Boolean?  @default(false)
+  signup_date     DateTime  @default(now()) @db.Timestamp(0)
+  last_login      DateTime? @db.DateTime(0)
+  plan_id         Int?      @default(1)
+  plan_expiration DateTime? @db.DateTime(0)
+  social_id       String?   @db.VarChar(100)
+  is_admin        Boolean?  @default(false)
+
+  @@index([plan_id], map: "fk_plan1")
+}
+
+model member_profile {
+  id                       BigInt    @default(autoincrement()) @db.UnsignedBigInt
+  member_id                Int
+  category_id              Int
+  framework_id             Int?      @default(1)
+  name                     String?   @db.VarChar(255)
+  artist_name              String?   @db.VarChar(255)
+  model_name               String?   @db.VarChar(255)
+  profile_image            String?   @db.VarChar(255)
+  slogan                   String?   @db.Text
+  discography              String?   @db.Text
+  introduction             String?   @db.Text
+  affiliations             String?   @db.Text
+  media_quotes             String?   @db.Text
+  achievements             String?   @db.Text
+  languages                String?   @db.Text
+  location                 String?   @db.Text
+  hometown                 String?   @db.Text
+  professional_category_id Int?
+  model_height             String?   @db.VarChar(100)
+  model_bust               String?   @db.VarChar(100)
+  model_cup                String?   @db.VarChar(100)
+  model_hips               String?   @db.VarChar(100)
+  model_inseam             String?   @db.VarChar(100)
+  model_eye_color          String?   @db.VarChar(100)
+  model_shoe_size          String?   @db.VarChar(100)
+  sports_name              String?   @db.VarChar(255)
+  sports_weight            String?   @db.VarChar(100)
+  sports_height            String?   @db.VarChar(100)
+  sports_position          String?   @db.VarChar(100)
+  sports_stats             String?   @db.Text
+  date_of_birth            DateTime? @db.Date
+
+  @@id([id, member_id])
+  @@index([category_id], map: "fk_category1")
+}
+
+model profile_domains {
+  id            Int      @id @default(autoincrement())
+  member_id     Int
+  domain        String   @db.VarChar(200)
+  subdomain     String   @db.VarChar(200)
+  ftp_username  String?  @db.VarChar(100)
+  ftp_password  String?  @db.VarChar(100)
+  is_built      Boolean? @default(false)
+  custom_domain String?  @db.VarChar(100)
+  in_vercel     Boolean? @default(false)
+  in_cloudflare Boolean? @default(false)
+  error_message String?  @db.Text
+  is_verified   Boolean? @default(false)
+
+  @@index([member_id], map: "fk_member1")
+}
+
+model profile_custom_domains {
+  id                    Int       @id @default(autoincrement())
+  member_id             Int
+  domain                String    @unique(map: "domain") @db.VarChar(200)
+  framework_id          Int
+  ga4_measurement_id    String?   @db.VarChar(200)
+  header_script         String?   @db.Text
+  footer_script         String?   @db.Text
+  cpanel_username       String?   @db.VarChar(100)
+  cpanel_password       String?   @db.VarChar(100)
+  is_built              Boolean?  @default(false)
+  date_updated          DateTime  @default(now()) @db.Timestamp(0)
+  expiry_date           DateTime? @db.Date
+  cloudflare_identifier String?   @db.VarChar(200)
+  dns                   String?   @db.VarChar(200)
+
+  @@index([member_id], map: "fk_member1")
+}
+
+model profile_education {
+  id          Int       @id @default(autoincrement())
+  member_id   Int
+  from_date   DateTime? @db.DateTime(0)
+  to_date     DateTime? @db.DateTime(0)
+  school      String    @db.VarChar(200)
+  location    String    @db.VarChar(200)
+  description String?   @db.Text
+
+  @@index([member_id], map: "fk_member1")
+}
+
+model profile_experience {
+  id          Int       @id @default(autoincrement())
+  member_id   Int
+  from_date   DateTime? @db.DateTime(0)
+  to_date     DateTime? @db.DateTime(0)
+  location    String    @db.VarChar(200)
+  description String?   @db.Text
+
+  @@index([member_id], map: "fk_member1")
+}
+
+model profile_skills {
+  id        Int    @id @default(autoincrement())
+  member_id Int
+  skill     String @db.VarChar(200)
+
+  @@index([member_id], map: "fk_member1")
+}
+
+model profile_gallery {
+  id        Int    @id @default(autoincrement())
+  member_id Int
+  filename  String @db.VarChar(200)
+
+  @@index([member_id], map: "fk_member1")
+}
+
+model profile_links {
+  id        Int    @id @default(autoincrement())
+  member_id Int
+  title     String @db.VarChar(200)
+  link      String @db.VarChar(255)
+
+  @@index([member_id], map: "fk_member1")
+}
+
+model profile_social {
+  id         Int     @default(autoincrement())
+  member_id  Int
+  facebook   String? @db.VarChar(200)
+  instagram  String? @db.VarChar(200)
+  twitter    String? @db.VarChar(200)
+  soundcloud String? @db.VarChar(200)
+  youtube    String? @db.VarChar(200)
+  pinterest  String? @db.VarChar(200)
+  linkedin   String? @db.VarChar(200)
+  spotify    String? @db.VarChar(200)
+
+  @@id([id, member_id])
+  @@index([member_id], map: "fk_member1")
+}
+
+model website_views {
+  id                Int     @id @default(autoincrement())
+  profile_domain_id Int
+  date              String? @db.VarChar(200)
+  views             Int?    @default(0)
+
+  @@unique([profile_domain_id, date], map: "domain_date")
+  @@index([id], map: "id")
+  @@index([profile_domain_id], map: "profile_domain_id")
+}
+
+model custom_website_views {
+  id        Int     @id @default(autoincrement())
+  domain_id Int
+  date      String? @db.VarChar(200)
+  views     Int?    @default(0)
+
+  @@unique([domain_id, date], map: "domain_date")
+  @@index([domain_id], map: "domain_id")
+  @@index([id], map: "id")
+}

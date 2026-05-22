@@ -12,37 +12,23 @@ const nextConfig = {
           },
         ],
       },
-      {
-        source: '/partner',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 's-maxage=1, stale-while-revalidate=3600',
-          },
-        ],
-      },
-      {
-        source: '/about',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 's-maxage=1, stale-while-revalidate=3600',
-          },
-        ],
-      },
-      {
-        source: '/contact',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 's-maxage=1, stale-while-revalidate=3600',
-          },
-        ],
-      },
     ];
   },
   images: {
-    domains: ['cdn.vnoc.com', 'vnoclogos.s3-us-west-1.amazonaws.com','vnocimages.s3.amazonaws.com', 'tools.contrib.com','projectcafe.com', 'contrib.com','vnoclogos.s3-us-west-1.amazonaws.com','vnoclogos.s3.amazonaws.com','vbot-images.s3.us-east-1.amazonaws.com','images.pexels.com','www.profilesuite.com'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'cdn.vnoc.com' },
+      { protocol: 'https', hostname: 'vnoclogos.s3-us-west-1.amazonaws.com' },
+      { protocol: 'https', hostname: 'vnocimages.s3.amazonaws.com' },
+      { protocol: 'https', hostname: 'tools.contrib.com' },
+      { protocol: 'https', hostname: 'projectcafe.com' },
+      { protocol: 'https', hostname: 'contrib.com' },
+      { protocol: 'https', hostname: 'vnoclogos.s3.amazonaws.com' },
+      { protocol: 'https', hostname: 'vbot-images.s3.us-east-1.amazonaws.com' },
+      { protocol: 'https', hostname: 'images.pexels.com' },
+      { protocol: 'https', hostname: 'www.profilesuite.com' },
+      { protocol: 'https', hostname: 'profilesuite-assets.s3.us-west-2.amazonaws.com' },
+      { protocol: 'https', hostname: 'picsum.photos' },
+    ],
   },
 }
 

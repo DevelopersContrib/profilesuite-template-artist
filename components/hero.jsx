@@ -4,7 +4,7 @@ export default function Hero({ profile, links, gallery }) {
   return (
     <section 
       className="hero-section" 
-      style={{ backgroundImage: "url(https://www.profilesuite.com/uploads/profile/"+profile.profile_image+")" }}
+      style={{ backgroundImage: `url(${profile.profile_image})` }}
     >
       <div className="container container-padding">
         <div className="row align-items-center gy-6 gy-xl-0">

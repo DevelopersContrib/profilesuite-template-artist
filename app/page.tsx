@@ -3,13 +3,14 @@ import Hero from "../components/hero";
 import Gallery from "../components/gallery";
 import Biography from "../components/biography";
 import Footer from "../components/footer";
-import {  getDomain, getProfile, updateProfile } from "../lib/data";
+import { getDomain, getProfile, updateProfile } from "../lib/data";
 
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const updated = await updateProfile();
   const c = await getProfile();
-  const domain = getDomain();
+  const domain = await getDomain();
   const profile = c.data.profile;
   const education = c.data.education;
   const experience = c.data.experience;
