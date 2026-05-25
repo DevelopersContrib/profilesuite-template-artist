@@ -1,11 +1,43 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap");
-
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--surface-0: #0b0b0c;
+	--surface-1: #131315;
+	--surface-2: #1b1b1f;
+	--ink-0: #f6f4ee;
+	--ink-1: #d8d4cb;
+	--ink-2: #948f84;
+	--accent: #d6b878;
+	--rule: rgba(246, 244, 238, 0.08);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+html,
 body {
-  font-family: "Open Sans", sans-serif !important;
+	background-color: var(--surface-0);
+	color: var(--ink-1);
+	font-family: var(--font-sans), system-ui, sans-serif;
+	font-feature-settings: 'ss01', 'cv11';
+	-webkit-font-smoothing: antialiased;
+}
+
+section[id] {
+	scroll-margin-top: 72px;
+}
+
+body {
+	font-family: var(--font-sans), system-ui, sans-serif !important;
 }
 
 h1,
@@ -20,113 +52,68 @@ h5,
 .h5,
 h6,
 .h6 {
-  font-family: "Poppins", sans-serif !important;
+	font-family: var(--font-display), Georgia, serif !important;
+	color: var(--ink-0);
+	letter-spacing: -0.01em;
+}
+
+::selection {
+	background: var(--accent);
+	color: var(--surface-0);
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+	transition: color 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+a:hover {
+	color: var(--accent);
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
 }
 
 .font-300 {
-  font-weight: 300 !important;
+	font-weight: 300 !important;
 }
 .font-400 {
-  font-weight: 400 !important;
+	font-weight: 400 !important;
 }
 .font-500 {
-  font-weight: 500 !important;
+	font-weight: 500 !important;
 }
 .font-600 {
-  font-weight: 600 !important;
+	font-weight: 600 !important;
 }
 .font-700 {
-  font-weight: 700 !important;
+	font-weight: 700 !important;
 }
 .font-800 {
-  font-weight: 800 !important;
+	font-weight: 800 !important;
 }
 
-/* Top Header Navbar
----------------------------- */
-.header-top-green-navbar {
-  background: #7abe3b;
-  background: -moz-linear-gradient(top, #7abe3b 0%, #54a43b 44%, #2c893c 100%);
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0%, #7abe3b),
-    color-stop(44%, #54a43b),
-    color-stop(100%, #2c893c)
-  );
-  background: -webkit-linear-gradient(
-    top,
-    #7abe3b 0%,
-    #54a43b 44%,
-    #2c893c 100%
-  );
-  background: -o-linear-gradient(top, #7abe3b 0%, #54a43b 44%, #2c893c 100%);
-  background: -ms-linear-gradient(top, #7abe3b 0%, #54a43b 44%, #2c893c 100%);
-  background: linear-gradient(to bottom, #7abe3b 0%, #54a43b 44%, #2c893c 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7abe3b', endColorstr='#2c893c',GradientType=0 );
-}
-
-.title-center-circle {
-  position: relative;
-}
-.title-center-circle::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 80px;
-  height: 80px;
-  border-radius: 100%;
-  opacity: 0.3;
-  transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  background: #007bff;
-}
-
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  /* border: 1px solid #efefef; */
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.swiper-slide img {
-  width: 285px;
-  height: 100px;
-  object-fit: contain;
-}
-
-/* 
- * Custom Blog Details CSS
- * 
- */
 .custom-blog-content h1 {
-  @apply tw-mb-4 tw-text-5xl;
+	@apply tw-mb-4 tw-text-5xl;
 }
 
 .custom-blog-content h2 {
-  margin-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 
 .custom-blog-content img {
-  margin-bottom: 1rem;
-  object-fit: contain;
-  width: 100%;
-  height: auto;
+	margin-bottom: 1rem;
+	object-fit: contain;
+	width: 100%;
+	height: auto;
 }
 
 .custom-blog-content ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin-bottom: 1rem;
+	list-style-type: none;
+	padding-left: 0;
+	margin-bottom: 1rem;
 }

@@ -1,19 +1,21 @@
 import Image from 'next/image'
 
-export default function Logo({domain,logo}) {
-  if(logo!=null && logo!=''){
-    return (
-        <Image 
-              src={logo}
-              width={300}
-              height={300}
-              alt=""
-              className='d-inline-flex img-fluid mb-3'
-            />
-    )
-  }else{
-    return(
-        <h1 className="tw-text-5xl font-800 tw-capitalize">{domain}</h1>
-    )
-  }
+export default function Logo({ domain, logo }) {
+	if (logo) {
+		return (
+			<Image
+				src={logo}
+				width={300}
+				height={300}
+				alt={domain || 'Logo'}
+				className='tw-inline-flex tw-max-w-full tw-h-auto tw-mb-3'
+			/>
+		)
+	}
+
+	return (
+		<h1 className='tw-text-5xl tw-font-extrabold tw-capitalize'>
+			{domain}
+		</h1>
+	)
 }

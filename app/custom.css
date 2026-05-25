@@ -1,121 +1,242 @@
-body {
-    background-color: #111111;
-}
-.navigation-bg {
-  background-color: #111111;
-}
-.navigation-bg a {
-  text-decoration: none;
-}
+/* Editorial dark portfolio — supplemental styles
+   ------------------------------------------------ */
 
-.hero-section {
-  position: relative;
-  background-color: #111111;
-  background-size: cover;
-  background-position: center;
-  color: #ffffff;
-  padding-top: 16rem;
-  padding-bottom: 16rem;
-  z-index: 1;
-  background-blend-mode: overlay;
+.grain-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 60;
+	pointer-events: none;
+	opacity: 0.07;
+	mix-blend-mode: overlay;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-
-.hero-section .container {
-  position: relative;
-  z-index: 2;
+/* Vertical kinetic ticker for hero */
+.marquee {
+	overflow: hidden;
+	mask-image: linear-gradient(
+		to bottom,
+		transparent 0,
+		#000 12%,
+		#000 88%,
+		transparent 100%
+	);
 }
 
-  
-  .container-padding {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-  
-  .shape-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    margin: auto;
-  }
-  
-  .background-shape {
-    position: absolute;
-    width: 100%;
-    padding-bottom: 100%;
-    background: #222222;
-    border-radius: 50%;
-    left: 0;
-    z-index: -1;
-  }
-  
-  .responsive-image {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-  }
-  
-  .aboutme-bg {
-    background-color: #222222;
-    color: #ffffff;
-  }
+.marquee__track {
+	animation: marquee 28s linear infinite;
+}
 
-  .aboutme-bg .icon-shape svg {
-    width: 48px;
-  }
+@keyframes marquee {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(-50%);
+	}
+}
 
-  .gallery-container {
-    column-count: 3;
-    column-gap: 16px;
-  }
-  
-  .gallery-item {
-    background: #222222;
-    padding: 15px;
-    display: inline-block;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 100%;
-  }
-  
-  .gallery-image {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+/* Image reveal */
+.reveal {
+	clip-path: inset(100% 0 0 0);
+	animation: reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 
-  .vital-stat-item {
-    min-width: 120px;
-    margin-right: 20px;
-  }
-  .vital-stat-label,
-  .vital-stat-value {
-    display: block;
-  }
-  
-    
-  @media (max-width: 992px) {
-    .gallery-container {
-      column-count: 2;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .gallery-container {
-      column-count: 1;
-    }
-  }
+@keyframes reveal {
+	to {
+		clip-path: inset(0 0 0 0);
+	}
+}
 
-  .footer-bg {
-    background-color: #111111;
-  }
+.fade-up {
+	opacity: 0;
+	transform: translateY(14px);
+	animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 
-  footer .social-icons svg {
-    width: 24px;
-  }
+@keyframes fade-up {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 
-  .experience-label svg, .location-label svg {
-    width: 10px;
-    margin-right: 5px;
-  }
+/* Masonry gallery — pure CSS columns, no chunky frames */
+.masonry {
+	column-count: 3;
+	column-gap: 1.25rem;
+}
+
+@media (max-width: 992px) {
+	.masonry {
+		column-count: 2;
+	}
+}
+
+@media (max-width: 640px) {
+	.masonry {
+		column-count: 1;
+	}
+}
+
+.masonry > * {
+	break-inside: avoid;
+	margin-bottom: 1.25rem;
+}
+
+.tile {
+	position: relative;
+	overflow: hidden;
+	border-radius: 6px;
+	background: var(--surface-1);
+	display: block;
+	transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tile img {
+	width: 100%;
+	height: auto;
+	display: block;
+	transition: transform 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+		filter 600ms ease;
+	filter: saturate(0.92) brightness(0.92);
+}
+
+.tile:hover img {
+	transform: scale(1.04);
+	filter: saturate(1.05) brightness(1);
+}
+
+.tile::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border: 1px solid transparent;
+	transition: border-color 400ms ease;
+	pointer-events: none;
+	border-radius: 6px;
+}
+
+.tile:hover::after {
+	border-color: rgba(214, 184, 120, 0.35);
+}
+
+.tile__index {
+	position: absolute;
+	left: 12px;
+	top: 12px;
+	font-family: var(--font-sans), monospace;
+	font-size: 10px;
+	letter-spacing: 0.18em;
+	color: var(--ink-0);
+	background: rgba(11, 11, 12, 0.55);
+	backdrop-filter: blur(8px);
+	padding: 4px 8px;
+	border-radius: 999px;
+	opacity: 0;
+	transform: translateY(-4px);
+	transition: all 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tile:hover .tile__index {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Display headline */
+.display {
+	font-family: var(--font-display), Georgia, serif;
+	font-weight: 300;
+	line-height: 0.92;
+	letter-spacing: -0.035em;
+}
+
+.display em {
+	font-style: italic;
+	font-variation-settings: 'SOFT' 100, 'WONK' 1;
+	color: var(--accent);
+}
+
+.eyebrow {
+	font-family: var(--font-sans), system-ui, sans-serif;
+	font-size: 11px;
+	font-weight: 500;
+	letter-spacing: 0.32em;
+	text-transform: uppercase;
+	color: var(--ink-2);
+}
+
+.divider {
+	height: 1px;
+	background: var(--rule);
+	width: 100%;
+}
+
+/* Bias correction for Bootstrap container intrusion */
+.section-shell {
+	width: 100%;
+	max-width: 1400px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+}
+
+@media (min-width: 768px) {
+	.section-shell {
+		padding-left: 2.5rem;
+		padding-right: 2.5rem;
+	}
+}
+
+@media (min-width: 1280px) {
+	.section-shell {
+		padding-left: 4rem;
+		padding-right: 4rem;
+	}
+}
+
+/* Subtle hover for inline links */
+.link-underline {
+	background-image: linear-gradient(currentColor, currentColor);
+	background-size: 0% 1px;
+	background-repeat: no-repeat;
+	background-position: 0 100%;
+	transition: background-size 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-underline:hover {
+	background-size: 100% 1px;
+}
+
+/* Hero edge fade — anchors the image to the page */
+.hero-portrait {
+	position: relative;
+}
+
+.hero-portrait::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		180deg,
+		transparent 50%,
+		rgba(11, 11, 12, 0.6) 88%,
+		rgba(11, 11, 12, 1) 100%
+	);
+	pointer-events: none;
+}
+
+.hero-portrait::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(
+		120% 80% at 60% 30%,
+		transparent 0%,
+		rgba(11, 11, 12, 0.35) 60%,
+		rgba(11, 11, 12, 0.7) 100%
+	);
+	pointer-events: none;
+	z-index: 1;
+}

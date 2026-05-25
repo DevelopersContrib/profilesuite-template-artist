@@ -4,10 +4,10 @@ const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 function createPrismaClient() {
   return new PrismaClient({
-    log:
-      process.env.NODE_ENV === "development"
-        ? ["query", "error", "warn"]
-        : ["error"],
+    // Keep Prisma's own logger quiet in dev so connection errors don't
+    // surface as Next.js runtime overlays. Real failures are handled
+    // explicitly in lib/data.jsx with graceful fallbacks.
+    log: process.env.NODE_ENV === "development" ? ["warn"] : [],
   });
 }
 
